@@ -14,10 +14,10 @@
 Joystick_ Joystick;
 
 // H-shifter mode analog axis thresholds
-#define HS_XAXIS_12        400
-#define HS_XAXIS_56        500
-#define HS_YAXIS_135       800
-#define HS_YAXIS_246       300
+#define HS_XAXIS_12        450
+#define HS_XAXIS_56        650
+#define HS_YAXIS_135       900
+#define HS_YAXIS_246       500
 
 // Sequential shifter mode analog axis thresholds
 #define SS_UPSHIFT_BEGIN   670
@@ -67,6 +67,7 @@ int mode=SHIFTER_MODE;
 int b[16];
 
 int gear=0;                          // Default value is neutral
+const int potPin = A3; //Pin A0, aka the first analog pin to which the potentiometer is attached
 
 // Constant that maps the phyical pin to the joystick button.
 //const int pinToButtonMap = 9;
@@ -137,10 +138,14 @@ if( _isreverse == 1 ){
       Joystick.setButton(gear-1, HIGH);
    }
    delay(50);
+   {
+  int rawValue = analogRead(potPin); //Read the value of the potentiometer 
+  int value = 255 - map(rawValue, 0, 1023, 0, 255); //Map the value of the pot between the min and max value
+  Joystick.setThrottle(value); //Send the value to the joystick
+}
 }
 
 void desactivar(){
   // Depress virtual button for current gear
   for(int i = 0; i <= 10 ; i++ )  Joystick.setButton(i, LOW);
 }
-
