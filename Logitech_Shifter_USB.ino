@@ -14,10 +14,10 @@
 Joystick_ Joystick;
 
 // H-shifter mode analog axis thresholds
-#define HS_XAXIS_12        450
+#define HS_XAXIS_12        415
 #define HS_XAXIS_56        650
-#define HS_YAXIS_135       900
-#define HS_YAXIS_246       500
+#define HS_YAXIS_135       800
+#define HS_YAXIS_246       335
 
 // Sequential shifter mode analog axis thresholds
 #define SS_UPSHIFT_BEGIN   670
